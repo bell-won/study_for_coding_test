@@ -1,7 +1,6 @@
 from sys import stdin
 import copy
-tCase = int(stdin.readline().strip())
-for i in range(tCase):
+for i in range(int(stdin.readline().strip())):
     line = stdin.readline().strip().split(' ')
     N = int(line[0])
     M = int(line[1])
@@ -12,12 +11,11 @@ for i in range(tCase):
         priorityQueue.append([index,int(priority)])
     index = 0
     while(True):
-        if len(list(filter(lambda x: x[1] > priorityQueue[index][1], priorityQueue[index+1:]))) > 0:
-            priorityQueue.append(priorityQueue[index])
-            priorityQueue = priorityQueue[index+1:]
+        if priorityQueue[0][1] < max(priorityQueue, key=lambda x:x[1])[1]:
+            priorityQueue.append(priorityQueue.pop(0))
         else:
             if M == priorityQueue[index][0]:
                 print(currOrder)
                 break
-            priorityQueue = priorityQueue[index+1:]
+            priorityQueue.pop(0)
             currOrder += 1
