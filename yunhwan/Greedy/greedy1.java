@@ -19,6 +19,7 @@ public class greedy1 {
 			one++; temp = 1;
 		}
 		
+		// 연속된 0의 개수 count와 1의 개수를 count를 구해 더 작은 값의 숫자를 바꿈 
 		for(int i=1; i<s.length(); i++) {
 			if(str[i].equals(temp+"")) {
 				continue;

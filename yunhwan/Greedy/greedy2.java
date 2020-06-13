@@ -28,15 +28,17 @@ public class greedy2 {
 			arr[i] = set;
 			arr2[i] = pri;
 		}
+		
+		//최솟값을 찾기위해
 		Arrays.sort(arr);
 		Arrays.sort(arr2);
 		
-		int temp = Gline/6+1;
-		int temp2 = Gline%6;
+		int temp = Gline/6+1; 	//세트 가격
+		int temp2 = Gline%6;  	//낱개 가격
 		
-		int num1 = arr[0]*temp;
-		int num2 = (arr[0]*(temp-1)) + arr2[0]*temp2;
-		int num3 = arr2[0]*Gline;
+		int num1 = arr[0]*temp;	//세트가격 최솟값
+		int num2 = (arr[0]*(temp-1)) + arr2[0]*temp2; //세트와 낱개 합쳐서 최솟값
+		int num3 = arr2[0]*Gline; //낱개가격 최솟값
 		
 		int min = Math.min(num1, num2);
 		int min2 = Math.min(min, num3);
