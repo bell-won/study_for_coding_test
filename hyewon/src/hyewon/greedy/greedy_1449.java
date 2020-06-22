@@ -19,7 +19,7 @@ public class greedy_1449 {
 		int n = Integer.parseInt(st.nextToken());
 		int l = Integer.parseInt(st.nextToken());
 		int[]hole = new int[n];
-		int count =0;
+		int cnt =0;
 		
 		st = new StringTokenizer(br.readLine());
 		for(int i=0; i<n; i++){	
@@ -29,19 +29,19 @@ public class greedy_1449 {
 		Arrays.sort(hole);
 		int cur = hole[0];
 		int range = (int)(hole[0]-0.5+l);
-		count++;
+		cnt++;
 		
 		for(int i=1; i<n; i++){
 			cur = hole[i];
 			if(cur<=range){
 				continue;
 			}else{
-				count++;
+				cnt++;
 				range = (int)(hole[i]-0.5+l);
 			}
 		}
 		
-		System.out.println(count);
+		System.out.println(cnt);
 
 	}
 
