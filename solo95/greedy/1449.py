@@ -12,7 +12,6 @@ while index < len(hole):
     while currentIndex < len(hole):
         if hole[currentIndex] < maxCoverDistance:
             currentIndex += 1
-            continue
         else:
             break
     count += 1
