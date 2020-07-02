@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
 public class BinarySearch_10816 {
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		//HashMap으로 풀기
+		//HashMap 방식
 		/*
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
@@ -37,7 +37,7 @@ public class BinarySearch_10816 {
 			}
 		}
 		*/
-		//이분탐색
+		//이분탐색 방식
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		int N = Integer.parseInt(br.readLine());
