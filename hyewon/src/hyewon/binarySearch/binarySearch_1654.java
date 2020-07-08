@@ -1,5 +1,4 @@
 package hyewon.binarySearch;
-//https://dundung.tistory.com/53 참고
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +23,7 @@ public class binarySearch_1654 {
 		Arrays.sort(array);
 		
 		long min =1;
-		long max = array[k-1];     // int로 할 경우 error 발생
+		long max = array[k-1];     
 		long middle =0;
 		
 		while(min <= max) {

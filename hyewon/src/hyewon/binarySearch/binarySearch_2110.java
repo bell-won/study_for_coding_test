@@ -1,6 +1,5 @@
 package hyewon.binarySearch;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,13 +22,13 @@ public class binarySearch_2110 {
         Arrays.sort(array);
         
         int start = 1;
-        int end = array[n-1]-1;
-        int count =1;
-        int result,mid =0;
+        int end = array[n-1]-array[0];
+        int result=0;
         
         while(start<=end){
-        	mid = (start+end)/2;
+        	int mid = (start+end)/2;
         	int prev = array[0];
+        	int count =1;
         	for(int i=1; i<array.length; i++){
         		if(array[i]-prev>=mid){
         			count++;
@@ -45,7 +44,7 @@ public class binarySearch_2110 {
         
         	
         }
-        System.out.println(mid);
+        System.out.println(result);
         
     }
 
