@@ -1,4 +1,4 @@
-package hyewon;
+package stack;
 
 import java.util.*;
 import java.io.BufferedReader;
