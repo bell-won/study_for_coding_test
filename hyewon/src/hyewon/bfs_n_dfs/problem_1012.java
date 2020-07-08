@@ -1,4 +1,4 @@
-package bfs_n_dfs;
+package hyewon.bfs_n_dfs;
 
 import java.io.BufferedReader;
 import java.io.IOException;
