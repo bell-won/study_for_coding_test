@@ -7,8 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-public class string_10546 {
-
+public class String_10546 {
 	public static void main(String[] args)throws IOException {
 		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -31,7 +30,7 @@ public class string_10546 {
 				map.replace(str, map.get(str)-1);
 			}
 		}
-		
+
 		Set set = map.keySet();
 		Iterator iterator = set.iterator();		
 		while(iterator.hasNext()){

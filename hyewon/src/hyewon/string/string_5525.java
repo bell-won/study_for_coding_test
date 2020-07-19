@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class string_5525 {
+public class String_5525 {
 	static int n,m;
 	static String s;
 	static StringBuilder pattern;
@@ -22,8 +22,6 @@ public class string_5525 {
 		
 		System.out.println(list.size());
 		
-		
-
 	}
 	public static void setting() {
 		pattern = new StringBuilder("IOI");
@@ -66,7 +64,6 @@ public class string_5525 {
 				}
 			}
 		}
-		return list;
-		
+		return list;	
 	}
 }
