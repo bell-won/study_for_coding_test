@@ -1,0 +1,76 @@
+package hyewon.trie;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class trie_4358 {
+	static int N;
+	static int cnt =0;
+	static class TrieNode{
+		TrieNode[] child;
+		boolean isEnd;
+		public TrieNode(){
+			this.child = new TrieNode[128];
+			this.isEnd = false;
+		}
+	}
+	static TrieNode root;
+	static void insert(String word,int idx){
+		TrieNode trie = root;
+		int length = word.length();
+		int level,index;
+		
+		for(level=0; level<length; level++){
+			index = word.charAt(level);
+			if(trie.child[index]==null)
+				trie.child[index] = new TrieNode();
+			trie = trie.child[index];
+		}
+		cnt++;
+		N++;
+		trie.isEnd = true;
+	}
+	static boolean search(String word,int idx){
+		TrieNode trie = root;
+		if(word.length()==idx){
+			return trie.isEnd == true ? true : false;
+		}
+		int cur = word.charAt(idx)- ' ';
+		if(trie.child[cur] == null){
+			return false;
+		}
+		
+		return search(word,idx+1);
+	}
+	public static void main(String[] args)throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		List<String> list = new ArrayList<>();
+		String str = br.readLine();
+		while(!str.isEmpty()){
+			list.add(str);
+			str = br.readLine();
+		}
+		Collections.sort(list);
+		
+		root = new TrieNode();
+		
+		for(int i=0; i<list.size(); i++){
+			str = list.get(i);
+			insert(str,0);
+		}
+		
+
+		for(int i=0; i<126; i++){
+			if(root.child[i]!=null && cnt>0){
+				System.out.printf("%s %.4f\n", str, 100.0 * cnt/N);
+			}
+		}
+	}
+
+}
