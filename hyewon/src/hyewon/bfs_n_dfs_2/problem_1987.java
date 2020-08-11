@@ -39,6 +39,8 @@ public class problem_1987 {
 		if(visited[map[x][y]]){
 			ans = Math.max(ans, cnt);
 			return;
+			
+			
 		} else{
 			visited[map[x][y]] = true;
 			for(int i=0; i<4; i++){

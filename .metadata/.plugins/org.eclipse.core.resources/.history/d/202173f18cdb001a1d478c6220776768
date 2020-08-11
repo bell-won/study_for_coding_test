@@ -1,0 +1,60 @@
+package hyewon.bfs_n_dfs_3;
+
+import java.util.LinkedList;
+import java.util.Queue;
+class Solution {
+	static int[][] board = {{0,0,0},{0,0,0},{0,0,0}};
+	static int xx[] = {-1, 0, 1, 0};
+    static int yy[] = {0, -1, 0, 1};
+
+         public static int solution(int[][] board) {
+            int answer = 0;
+            int n = board.length;
+
+            boolean check[][] = new boolean[n][n];
+
+            Queue<Road> q = new LinkedList<Road>();
+            if(board[0][1] != 1) {
+                q.add(new Road(0, 1, 100, 3));
+                check[0][1] = true;
+            }
+            if(board[1][0] != 1) {
+                q.add(new Road(1, 0, 100, 2));
+                check[1][0] = true;
+            }
+
+            while(!q.isEmpty()) {
+                Road temp = q.poll();
+
+                for(int i = 0; i < 4; i++) {
+                    int new_x = temp.x + xx[i];
+                    int new_y = temp.y + yy[i];
+                    if(new_x >= 0 && new_x < n && new_y >= 0 && new_y < n && board[new_x][new_y] != 1) {
+                        int new_cost = temp.dir == i ? 100 : 600;
+                        if(board[new_x][new_y] == 0) {
+                            board[new_x][new_y] = temp.cost +  new_cost;
+                            q.add(new Road(new_x, new_y, temp.cost + new_cost, i));
+                        }else {
+                            if(board[new_x][new_y] >= temp.cost + new_cost) {
+                                board[new_x][new_y] = temp.cost +  new_cost;
+                                q.add(new Road(new_x, new_y, temp.cost + new_cost, i));
+                            }
+                        }
+                    }
+                }
+            }
+
+            return board[n - 1][n - 1];
+        }
+}
+
+
+class Road{
+    int x,y,cost, dir;
+    Road(int x, int y, int cost, int dir){
+        this.x = x;
+        this.y = y;
+        this.cost = cost;
+        this.dir = dir;
+    }
+}

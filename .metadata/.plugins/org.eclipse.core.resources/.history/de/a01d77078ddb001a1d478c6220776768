@@ -1,0 +1,29 @@
+package hyewon.trie;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class TrieNode {
+
+	//자식 노드 맵
+	private Map<Character, TrieNode> childNodes = new HashMap<>();
+	// 마지막 글자 여부
+	private boolean isLastChar;
+	
+	// 자식 노드 맵 getter
+	Map<Character, TrieNode> getChildNodes(){
+		return this.childNodes;
+	}
+	
+	// 마지막 글자 여부 getter
+	boolean isLastChar(){
+		return this.isLastChar;
+	}
+	
+	// 마지막 글자 여부 setter
+	void setIsLastChar(boolean isLastChar){
+		this.isLastChar = isLastChar;
+	}
+	
+
+}

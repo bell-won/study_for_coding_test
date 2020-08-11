@@ -1,0 +1,41 @@
+package hyewon.brutal_force;
+
+import java.util.Scanner;
+
+public class test_1 {
+	
+	public static int cnt =0;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		
+		//n까지 정수배열
+		int[] input=new int[n];
+		//input에서 값을 추출하여 저장
+		int[] array=new int[n];
+		//index 접근 유무 확인 용도
+		boolean[] access = new boolean[n];
+		
+		for(int i=0; i<n; i++){
+			input[i] = i+1;
+		}
+		check(input, array, access, 0,n);
+
+	}
+	public static void check(int[] input,int[] array,boolean[] access,int dep,int n){
+		if(n>dep){
+			for(int i=0; i<n; i++){
+				cnt++;
+				if(!access[i]){
+					array[dep] = input[i];
+					access[i] = true;
+					check(input, array, access,dep+1,n);
+					access[i] = false;
+				}
+			}
+		}
+	}
+
+}

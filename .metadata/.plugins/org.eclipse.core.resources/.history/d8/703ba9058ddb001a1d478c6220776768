@@ -1,0 +1,79 @@
+package hyewon.trie;
+// https://blog.naver.com/sknglee22/222037628424 블로그 참고
+
+public class Trie {
+	// 루트 노드
+	private TrieNode rootNode;
+	
+	// 생성자
+	Trie(){
+		rootNode = new TrieNode();
+	}
+	
+	// 자식 노드 추가
+	void insert(String word){
+		TrieNode thisNode = this.rootNode;
+		
+		for(int i=0;i<word.length(); i++){
+			thisNode = thisNode.getChildNodes().computeIfAbsent(word.charAt(i), c -> new TrieNode());
+		}
+		
+		thisNode.setIsLastChar(true);
+	}
+	
+	// 특정 단어가 들어가있는지 확인
+	// 순서대로 알파벳이 일치하는 자식노드들이 존재하는가
+	// 마지막 글자에 해당하는 노드의 isLastChar이 true인가
+	boolean contains(String word){
+		TrieNode thisNode = this.rootNode;
+		
+		for(int i=0; i<word.length();i++){
+			char ch = word.charAt(i);
+			TrieNode node = thisNode.getChildNodes().get(ch);
+			
+			if(node == null)
+				return false;
+			
+			thisNode = node;
+		}
+		
+		return thisNode.isLastChar();
+		
+	}
+	
+	// 특정 단어 지우기
+	// 자식 노드가 존재하지 않아야 한다.
+	// isLastChar = false 인 경우에만 삭제대상
+	void delete(String word){
+		delete(this.rootNode,word,0);
+	}
+	
+	private void delete(TrieNode thisNode, String word,int index){
+		char ch = word.charAt(index);
+		
+		// 아예 없는 단어인 경우 에러 출력
+		if(!thisNode.getChildNodes().containsKey(ch))
+			throw new Error("There is no [" + word +"] in this Trie");
+		
+		TrieNode childNode = thisNode.getChildNodes().get(ch);
+		index++;
+		
+		if(index == word.length()){
+			// insert한 단어가 아닌 경우 에러 출력
+			if(!childNode.isLastChar())
+				throw new Error("There is no [" + word +"] in this Trie");
+			
+			childNode.setIsLastChar(false);
+			
+			if(childNode.getChildNodes().isEmpty())
+				thisNode.getChildNodes().remove(ch);
+		}else{
+			delete(childNode, word, index); // 콜백함수 부분
+			// 자식노드가 없고 현재 노드로 끝나는 다른 단어가 없는 경우 이 노드 삭제
+			if(!childNode.isLastChar() && childNode.getChildNodes().isEmpty())
+				thisNode.getChildNodes().remove(ch);
+		}
+	}
+	
+
+}
