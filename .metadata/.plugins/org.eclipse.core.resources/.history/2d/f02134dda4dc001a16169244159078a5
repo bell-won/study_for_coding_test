@@ -1,0 +1,36 @@
+package hyewon.string_2;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class string_1543 {
+
+	public static void main(String[] args)throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String a = br.readLine();
+		String b = br.readLine();
+		int result = 0,tmp =0;
+		
+		while(tmp>a.length()){
+			int cnt = 1;
+			for(int i=0; i<b.length(); i++){
+				if(a.charAt(tmp)==b.charAt(i)){
+					if(cnt==b.length()){
+						result++;
+					}
+					tmp++;
+					cnt++;
+				}else{
+					continue;
+				}
+			}
+			tmp++;
+		}
+		
+		System.out.println(result);
+
+	}
+
+}
