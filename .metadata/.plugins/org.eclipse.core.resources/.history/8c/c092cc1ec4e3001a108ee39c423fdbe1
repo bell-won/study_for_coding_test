@@ -1,0 +1,72 @@
+package hyewon.bfs_n_dfs_4;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+class Node{
+	int x;
+	int y;
+	Node(int x,int y){
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class pr {
+	static Node home;
+	static Node festival;
+	static ArrayList<Node> list;
+	static int[][] dist;
+	
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		int T = Integer.parseInt(br.readLine());
+		
+		for(int testcase =0; testcase<T; testcase++){
+			int N = Integer.parseInt(br.readLine());
+			list = new ArrayList<>();
+			dist = new int[N+2][N+2];
+			
+//			int home_x = Integer.parseInt(st.nextToken());
+//			int home_y = Integer.parseInt(st.nextToken());
+//			list.add(new Node(home_x,home_y));
+//			
+//			for(int i=0; i<N; i++){
+//				st = new StringTokenizer(br.readLine());
+//				int x = Integer.parseInt(st.nextToken());
+//				int y = Integer.parseInt(st.nextToken());			
+//				list.add(new Node(x,y));
+//			}
+//			
+//			st = new StringTokenizer(br.readLine());
+//			int festival_x = Integer.parseInt(st.nextToken());
+//			int festival_y = Integer.parseInt(st.nextToken());
+//			list.add(new Node(festival_x,festival_y));
+			
+			for(int i=0; i<N+2; i++){
+				st = new StringTokenizer(br.readLine());
+				int x = Integer.parseInt(st.nextToken());
+				int y = Integer.parseInt(st.nextToken());
+				list.add(new Node(x,y));
+			}
+			
+			for(int i=0; i<N+2; i++){
+				for(int j=0; j<N+2; j++){
+					dist[i][j] = Math.abs(list.get(i).x - list.get(j).x) + Math.abs(list.get(i).y - list.get(j).y);
+				}
+			}
+			
+			System.out.println(dist[0][1]);
+		}
+	}
+
+}
+
+
+

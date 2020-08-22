@@ -1,0 +1,98 @@
+package hyewon.bfs_n_dfs_4;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
+
+class Node{
+	int x;
+	int y;
+	Node(int x, int y){
+		this.x=x;
+		this.y=y;
+	}
+}
+
+public class pr {
+	static int T,N;
+	static int home_x, home_y;
+	static int rock_x, rock_y;
+	static boolean[] chk;
+	static ArrayList<Node> list;
+	
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		T = Integer.parseInt(br.readLine());
+		for(int testcase=0; testcase<T; testcase++) {
+			list = new ArrayList<>();
+			N = Integer.parseInt(br.readLine());
+			
+			st = new StringTokenizer(br.readLine());
+			home_x = Integer.parseInt(st.nextToken());
+			home_y = Integer.parseInt(st.nextToken());
+			list.add(new Node(home_x,home_y));
+			
+			for(int i=0; i<N; i++) {
+				st = new StringTokenizer(br.readLine());				
+				list.add(new Node(Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken())));				
+			}
+			
+			st = new StringTokenizer(br.readLine());
+			rock_x = Integer.parseInt(st.nextToken());
+			rock_y = Integer.parseInt(st.nextToken());
+			list.add(new Node(rock_x,rock_y));
+			
+			chk = new boolean[N+2]; // 0은 HOME, 1~N은 편의점, N+1은 락페스티벌 
+			
+			solve();
+			
+			if(chk[N+1]) {
+				System.out.print("\nhappy");
+			}
+			else {
+				System.out.print("\nsad");
+			}
+		}
+		
+	}
+
+	public static int distance(int x1, int y1, int x2, int y2) {
+		return Math.abs(x1-x2) + Math.abs(y1-y2);
+	}
+	
+	public static void solve() {
+		Queue<Node> q = new LinkedList<>();
+		q.offer(new Node(home_x,home_y));
+		chk[0]=true;
+		
+		while(!q.isEmpty()) {
+			Node d = q.poll();
+			int x = d.x;
+			int y = d.y;
+			
+			for(int i=0; i<list.size(); i++) {
+				if(!chk[i]) {
+					if(distance(x,y,list.get(i).x,list.get(i).y) <= 1000) {
+						chk[i]=true;
+						q.offer(new Node(list.get(i).x, list.get(i).y));
+					}
+				}
+			}
+			
+			
+		}
+		
+		return;
+	}
+	
+}
+
+
+

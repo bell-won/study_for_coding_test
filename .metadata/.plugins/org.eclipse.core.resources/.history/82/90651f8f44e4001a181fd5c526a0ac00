@@ -1,0 +1,163 @@
+package hyewon.bfs_n_dfs_4;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
+ 
+public class laboratory14502 {
+ 
+    static int N, M;
+    static int[][] map, tempMap;
+    static int maxSafeZone;
+    static int[] dx = {-1, 0, 1, 0}; //위, 오른, 아래, 왼
+    static int[] dy = {0, 1, 0 ,-1};
+ 
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+ 
+        map = new int[N][M];
+        tempMap = new int[N][M];
+ 
+        //연구소 지도 그리기
+        for(int i = 0; i < N; i++) {
+            StringTokenizer str = new StringTokenizer(br.readLine());
+            for(int j = 0; j < M; j++) {
+                map[i][j] = Integer.parseInt(str.nextToken());
+            }
+        }
+ 
+        //벽세우기
+        for(int i = 0; i < N*M; i++) {
+            int x = i / M;
+            int y = i % M;
+            if(map[x][y] == 0) {
+                map[x][y] = 1;
+                dfs(i, 1);
+                map[x][y] = 0;
+            }
+        }
+        //최종답 출력
+        System.out.println(maxSafeZone);
+ 
+    }
+ 
+    //안전 영역 크기 구하기 메소드
+    public static void countSafeZone() {
+        int tempCnt = 0;
+        for(int i = 0; i < N; i++) {
+            for(int j = 0; j < M; j++) {
+                if(tempMap[i][j] == 0) {
+                    tempCnt++;
+                }
+            }
+        }
+        if(tempCnt > maxSafeZone) {
+            maxSafeZone = tempCnt;
+            
+            //아래는 풀이과정 보기 위한 코드.
+//            for(int i = 0; i < N; i++) {
+//                System.out.println();
+//                for(int j = 0; j < M; j++) {
+//                    System.out.print(tempMap[i][j]);
+//                    System.out.print(" ");
+//                }
+//            }
+//
+//            System.out.println("#" + maxSafeZone);
+            
+        }
+    }
+ 
+    //바이러스 확산 메소드
+    public static void bfs(int x, int y) {
+        Queue<Dot> q = new LinkedList<Dot>();
+        q.add(new Dot(x, y));
+ 
+        while(!q.isEmpty()) {
+            Dot d = q.poll();
+ 
+            for(int i = 0; i <4; i++) {
+                int nextx = d.x + dx[i];
+                int nexty = d.y + dy[i];
+ 
+                if(nextx < 0 || nexty < 0 || nextx >= N || nexty >= M) {
+                    continue;
+                }
+ 
+                if(tempMap[nextx][nexty] == 1) {
+                    continue;
+                }
+ 
+                if(tempMap[nextx][nexty] == 0) {
+                    tempMap[nextx][nexty] = 2;
+                    q.add(new Dot(nextx, nexty));
+                }
+            }
+        }
+    }
+ 
+    //벽 세우기 메소드
+    public static void dfs(int n, int numberOfWall) {
+        int x = n / M;
+        int y = n % M;
+ 
+        if(numberOfWall == 3) { //벽 3개를 모두 세웠으면
+ 
+            //임시 맵 만들기
+            tempMap = new int[N][M];
+            for(int i = 0; i < N; i++) {
+                for(int j = 0; j < M; j++) {
+                    tempMap[i][j] = map[i][j];
+                }
+            }
+ 
+            //바이러스 확산시키기
+            for(int i = 0; i< N; i++) {
+                for(int j = 0; j < M; j++) {
+                    if(tempMap[i][j] == 2) { //바이러스 지역이라면
+                        //확산 메소드 호출
+                        bfs(i, j);
+                    }
+                }
+            }
+            //안전 영역 크기 메소드 호출
+            countSafeZone();
+ 
+        }else { //벽 3개를 아직 모두 세우지 못했을 때
+            for(int i = n+1; i < N * M; i++) {
+                int tempx = i / M;
+                int tempy = i % M;
+ 
+                //다음 벽 세우기.
+                if(map[tempx][tempy] == 0) {
+                    map[tempx][tempy] = 1;
+                    dfs(i, numberOfWall+1);
+                }
+            }
+        }
+        //실험이 끝나고, 다시 map을 원상복구하기.
+        map[x][y] = 0;
+    }
+ 
+}
+ 
+class Dot{
+    int x, y;
+ 
+    Dot(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+}
+
+
+
+
+
+
+

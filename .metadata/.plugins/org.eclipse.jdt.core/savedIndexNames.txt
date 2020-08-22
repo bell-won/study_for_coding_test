@@ -2,6 +2,7 @@ INDEX VERSION 1.127+C:\Users\admin\Desktop\hyeonny\study_for_coding_test\.metada
 4188064455.index
 1065649595.index
 2978116687.index
+2085949927.index
 3750928321.index
 737330823.index
 486429261.index
