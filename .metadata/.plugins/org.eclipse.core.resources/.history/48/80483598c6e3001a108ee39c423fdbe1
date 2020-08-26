@@ -1,0 +1,57 @@
+package hyewon.bfs_n_dfs_4;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+class Node{
+	int x;
+	int y;
+	Node(int x,int y){
+		this.x = x;
+		this.y = y;
+	}
+}
+public class problem_9205 {
+	static int N,T;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
+        for (int t = 1; t <= T; t++) {
+            N = Integer.parseInt(br.readLine());
+            boolean flag = false;
+            int[][] dist = new int[N + 2][N + 2];
+            int[] chk = new int[N + 2];
+            Node[] nodes = new Node[N + 2];
+            for (int i = 0; i < N + 2; i++) {
+                StringTokenizer st = new StringTokenizer(br.readLine());
+                nodes[i] = new Node(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
+            }
+            for (int i = 0; i < N + 2; i++) {
+                for (int j = 0; j < N + 2; j++) {
+                    dist[i][j] = Math.abs(nodes[i].x - nodes[j].x) + Math.abs(nodes[i].y - nodes[j].y);
+                }
+            }
+
+//            Queue<Integer> queue = new LinkedList<>();
+//            queue.offer(0);
+//            chk[0] = 1;
+//            while (!queue.isEmpty()) {
+//                int now = queue.poll();
+//                if (now == n + 1) {
+//                    flag = true;
+//                    break;
+//                }
+//                for (int i = 0; i < n + 2; i++) {
+//                    if (chk[i] == 0 && now != i && dist[now][i] <= 1000) {
+//                        chk[i] = 1;
+//                        queue.offer(i);
+//                    }
+//                }
+//            }
+//            String ans = flag ? "happy" : "sad";
+            System.out.println(nodes[0]);
+        }
+    }
+
+}

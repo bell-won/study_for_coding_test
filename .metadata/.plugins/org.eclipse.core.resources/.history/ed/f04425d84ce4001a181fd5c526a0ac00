@@ -1,0 +1,47 @@
+package hyewon.bfs_n_dfs_4;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class problem_10026 {
+	static char[][] color;
+	static char[][] copy;
+	public static void main(String[] args)throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		
+		color = new char[n][n];
+		copy = new char[n][n];
+		
+		for(int i=0; i<n; i++){
+			String s = br.readLine();
+			for(int j=0; j<n; j++){
+				color[i][j] = s.charAt(j);
+			}
+		}
+		
+		for(int i=0; i<n; i++){
+			String s = br.readLine();
+			for(int j=0; j<n; j++){
+				if(s.charAt(j)=='R'){
+					copy[i][j] = 'B';
+				}else{
+					copy[i][j] = color[i][j];
+				}
+			}
+		}
+		
+		
+		for(int i=0; i<n; i++){
+			System.out.print("\n");
+			for(int j=0; j<n; j++){
+				System.out.print(copy[i][j]);
+			}
+		}
+		
+
+	}
+
+}

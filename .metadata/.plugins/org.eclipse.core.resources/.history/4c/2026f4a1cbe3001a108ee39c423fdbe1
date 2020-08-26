@@ -1,0 +1,77 @@
+package hyewon.bfs_n_dfs_4;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+class Node{
+	int x;
+	int y;
+	Node(int x,int y){
+		this.x = x;
+		this.y = y;
+	}
+}
+public class problem_9205 {
+	static int N,T;
+	static boolean flag;
+	static int[][] dis;
+	static boolean[] visited;
+	static Node[] nodes;
+	static Node end;
+	static ArrayList<Node> arr;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
+        for (int testcase=0; testcase<=T; testcase++) {
+            N = Integer.parseInt(br.readLine());
+            nodes = new Node[N+2];
+            dis = new int[N+2][N+2];
+            visited = new boolean[N+2];
+            flag = false;
+ 
+            for (int i = 0; i < N + 2; i++) {
+                StringTokenizer st = new StringTokenizer(br.readLine());
+                int x = Integer.parseInt(st.nextToken());
+                int y = Integer.parseInt(st.nextToken());
+                nodes[i] = new Node(x,y);
+            }
+            
+            end = nodes[N+1];
+            
+            for (int i=0; i < N+2; i++) {
+                for (int j=0; j <N+2; j++) {
+                    dis[i][j] = Math.abs(nodes[i].x - nodes[j].x) + Math.abs(nodes[i].y - nodes[j].y);
+                }
+            }
+
+            bfs();
+            
+            if(flag){
+            	System.out.println("happy");
+            }else{
+            	System.out.println("sad");
+            }
+        }
+    }
+    public static void bfs(){
+    	Queue<Node> q = new LinkedList<>();
+    	q.offer(nodes[0]);
+    	visited[0] = false;
+    	while(!q.isEmpty()){
+    		Node node = q.poll();
+    		if(node.equals(end)){
+    			flag = true;
+    			break;
+    		}
+    		for(int i=1; i<N+2; i++){
+    			if(!visited[i] && dis[i-1][i]<=1000){
+    				visited[i] = true;
+    				q.offer(nodes[i]);
+    			}
+    		}
+    	
+    	}
+    }
+
+}
