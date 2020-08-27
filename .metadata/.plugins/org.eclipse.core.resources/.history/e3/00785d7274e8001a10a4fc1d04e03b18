@@ -16,6 +16,7 @@ public class cache {
         System.out.println(solution(0, new String[]{"Jeju", "Pangyo", "Seoul", "NewYork", "LA"})); // 25
 
     }
+
     public static int solution(int cacheSize, String[] cities) {
         int answer = 0;
         
