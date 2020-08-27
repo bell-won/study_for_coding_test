@@ -5,22 +5,20 @@ package hyewon.kakaoproblem;
 public class carpet {
     public static int[] solution(int brown, int yellow) {
         int[] answer = new int[2];
-        // yellow = (width-2)*(height-2)
-        // brown * yellow = carpet
-        int area = brown + yellow;
+        int area = brown + yellow;   
         int w,h;
         for(int i=3; i<area; i++){
         	if(area%i==0){
         		w = i;
         		h = area/i;		
-        		if(w>=h && (w-2)*(h-2)==yellow){
+        		if(w>=h && (w-2)*(h-2)==yellow){ 
         			answer[0] = w;
         			answer[1] = h;
         		}
         		continue;
         	}
         }
-        
+ 
         return answer;
     }
 }
