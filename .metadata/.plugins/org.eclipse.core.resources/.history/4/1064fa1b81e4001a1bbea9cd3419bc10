@@ -58,7 +58,9 @@ public class problem_14502 {
 
 	}
 	
+	// 벽 세우기
 	public static void dfs(int x,int y,int count){
+//		System.out.println("\n" + count);
 		if(count == 3){ // 벽 3개를 생성했을 경우
 			bfs(x,y);
 			return;
@@ -79,6 +81,7 @@ public class problem_14502 {
 		
 	}
 	
+	// 바이러스 확산
 	public static void bfs(int x,int y){
 		// 임시 맵 생성
 		newtmp = new int[n][m];
